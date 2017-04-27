@@ -2,7 +2,7 @@
 # vim: set fileencoding=utf-8 :
 # -*- coding: utf-8 -*-
 #
-# Last modified: Fri, 28 Apr 2017 01:45:48 +0900
+# Last modified: Fri, 28 Apr 2017 01:58:48 +0900
 # 
 # (ex.) ./memogrep.py -q ~/Dropbox/Sync/Quiver/Quiver.qvlibrary keyword 
 #
@@ -68,7 +68,7 @@ def toString(meta, content, headerOnly, num_spaces):
         tagList.append("]")
 
     tagStr = ''.join(tagList)
-    str = "* %s%s %s%s%s %s" % (YELLOW, dateStr, BLUE, tagStr, RESET, meta["title"])
+    str = "* %s%s %s%s%s %s%s" % (YELLOW, dateStr, BLUE, tagStr, GREEN, meta["title"], RESET)
     if not headerOnly:
         cellList = []
         for cell in content["cells"]:
