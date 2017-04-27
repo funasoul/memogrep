@@ -3,8 +3,7 @@ A simple grep for Quiver memo.
 
 ## Usage
 ```sh
-usage: memogrep.py [-h] -q QVLIBRARY_PATH [-i] [-n NUM_SPACES] [-t] [-v]
-                   pattern
+memogrep.py [-h] -q QVLIBRARY_PATH [-i] [-n NUM_SPACES] [-t] [-v] pattern
 
 Search for PATTERN in my Quiver memo
 
