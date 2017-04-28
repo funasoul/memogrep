@@ -2,7 +2,7 @@
 # vim: set fileencoding=utf-8 :
 # -*- coding: utf-8 -*-
 #
-# Last modified: Fri, 28 Apr 2017 01:58:48 +0900
+# Last modified: Sat, 29 Apr 2017 05:59:19 +0900
 # 
 # (ex.) ./memogrep.py -q ~/Dropbox/Sync/Quiver/Quiver.qvlibrary keyword 
 #
@@ -12,6 +12,7 @@ import json
 import operator
 import os
 import sys
+from pprint import pprint
 
 __version__ = "1.0.0"
 
@@ -109,22 +110,23 @@ def main():
                 file = os.path.join(os.path.join(root, dir), 'meta.json')
                 if os.path.isfile(file):
                     with open(file) as data_file:
-                        data = json.load(data_file)
+                        data = json.loads(data_file.read(), 'utf-8')
                         dictCreateDate[data["uuid"]] = data["created_at"]
                         dictMeta[data["uuid"]] = data
 
                 contentfile = os.path.join(os.path.join(root, dir), 'content.json')
                 if os.path.isfile(contentfile):
                     with open(contentfile) as content_file:
-                        content_data = json.load(content_file)
+                        content_data = json.loads(content_file.read(), 'utf-8')
                         dictContent[data["uuid"]] = content_data
 
     sorted_dict = sorted(dictCreateDate.items(), key=operator.itemgetter(1), reverse=True)
+    utf8_pattern = args.pattern.decode('utf-8')
     for tuple in sorted_dict:
         key = tuple[0];
         meta = dictMeta[key]
         content = dictContent[key]
-        if contains_string(meta, args.pattern, args.ignore_case) or contains_string(content, args.pattern, args.ignore_case):
+        if contains_string(meta, utf8_pattern, args.ignore_case) or contains_string(content, utf8_pattern, args.ignore_case):
             print toString(meta, content, args.title, args.num_spaces)
 
 if __name__ == "__main__":
