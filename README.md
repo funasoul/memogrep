@@ -5,7 +5,7 @@ A simple grep for Quiver memo.
 ```sh
 usage: memogrep.py [-h] -q QVLIBRARY_PATH [-i] [-n NUM_SPACES] [-t] [-v] keyword [keyword ...]
 
-Search for PATTERN in my Quiver memo
+Search for KEYWORD in my Quiver memo
 
 positional arguments:
   keyword               search string

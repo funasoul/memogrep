@@ -2,7 +2,7 @@
 # vim: set fileencoding=utf-8 :
 # -*- coding: utf-8 -*-
 #
-# Last modified: Wed, 09 Aug 2017 12:15:39 -0400
+# Last modified: Wed, 09 Aug 2017 12:21:13 -0400
 # 
 # (ex.) ./memogrep.py -q ~/Dropbox/Sync/Quiver/Quiver.qvlibrary keyword 
 #
@@ -87,7 +87,7 @@ def indent(text, amount, ch=' '):
     return ''.join(padding+line for line in text.splitlines(True))
 
 def main():
-    parser = argparse.ArgumentParser(description="Search for PATTERN in my Quiver memo")
+    parser = argparse.ArgumentParser(description="Search for KEYWORD in my Quiver memo")
     parser.add_argument('-q', '--qvlibrary-path', action='store', required=True,
             help='Path to Quiver library (Quiver.qvlibrary)')
     parser.add_argument('-i', '--ignore-case', action='store_true',
