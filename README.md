@@ -3,12 +3,12 @@ A simple grep for Quiver memo.
 
 ## Usage
 ```sh
-memogrep.py [-h] -q QVLIBRARY_PATH [-i] [-n NUM_SPACES] [-t] [-v] pattern
+usage: memogrep.py [-h] -q QVLIBRARY_PATH [-i] [-n NUM_SPACES] [-t] [-v] keyword [keyword ...]
 
 Search for PATTERN in my Quiver memo
 
 positional arguments:
-  pattern               search string
+  keyword               search string
 
 optional arguments:
   -h, --help            show this help message and exit
