@@ -2,7 +2,7 @@
 # vim: set fileencoding=utf-8 :
 # -*- coding: utf-8 -*-
 #
-# Last modified: Sat, 29 Apr 2017 05:59:19 +0900
+# Last modified: Wed, 09 Aug 2017 12:15:39 -0400
 # 
 # (ex.) ./memogrep.py -q ~/Dropbox/Sync/Quiver/Quiver.qvlibrary keyword 
 #
@@ -98,7 +98,7 @@ def main():
             help='Displays title only')
     parser.add_argument('-v', '--version', action='version',
             version=('memogrep.py %s' % __version__))
-    parser.add_argument("pattern", help="search string")
+    parser.add_argument("pattern", metavar='keyword', nargs='+', help="search string")
     args = parser.parse_args()
 
     dictCreateDate = {}
@@ -121,12 +121,17 @@ def main():
                         dictContent[data["uuid"]] = content_data
 
     sorted_dict = sorted(dictCreateDate.items(), key=operator.itemgetter(1), reverse=True)
-    utf8_pattern = args.pattern.decode('utf-8')
+    utf8_pattern_list = [x.decode('utf-8') for x in args.pattern]
     for tuple in sorted_dict:
         key = tuple[0];
         meta = dictMeta[key]
         content = dictContent[key]
-        if contains_string(meta, utf8_pattern, args.ignore_case) or contains_string(content, utf8_pattern, args.ignore_case):
+        matched = True
+        for utf8_pattern in utf8_pattern_list:
+            if not contains_string(meta, utf8_pattern, args.ignore_case) and not contains_string(content, utf8_pattern, args.ignore_case):
+                matched = False
+
+        if matched:
             print toString(meta, content, args.title, args.num_spaces)
 
 if __name__ == "__main__":
