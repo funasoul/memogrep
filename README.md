@@ -1,5 +1,5 @@
 # memogrep
-A simple grep for Quiver memo.
+A simple grep for [Quiver](http://happenapps.com/#quiver) memo.
 
 ## Usage
 ```sh
