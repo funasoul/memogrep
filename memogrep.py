@@ -2,7 +2,7 @@
 # vim: set fileencoding=utf-8 :
 # -*- coding: utf-8 -*-
 #
-# Last modified: Wed, 09 Aug 2017 12:21:13 -0400
+# Last modified: Thu, 10 Aug 2017 21:54:30 -0400
 # 
 # (ex.) ./memogrep.py -q ~/Dropbox/Sync/Quiver/Quiver.qvlibrary keyword 
 #
@@ -53,7 +53,7 @@ def contains_string_ignorecase(dict, query):
 
     return False
 
-def toString(meta, content, headerOnly, num_spaces):
+def toString(meta, content, headerOnly, num_spaces, bullet_type):
     RESET   = '\033[0m'
     RED     = '\033[1;31m'
     GREEN   = '\033[1;32m'
@@ -69,7 +69,8 @@ def toString(meta, content, headerOnly, num_spaces):
         tagList.append("]")
 
     tagStr = ''.join(tagList)
-    str = "* %s%s %s%s%s %s%s" % (YELLOW, dateStr, BLUE, tagStr, GREEN, meta["title"], RESET)
+    #str = "* %s%s %s%s%s %s%s" % (YELLOW, dateStr, BLUE, tagStr, GREEN, meta["title"], RESET)
+    str = "%s %s%s %s%s%s %s%s" % (bullet_type, YELLOW, dateStr, BLUE, tagStr, GREEN, meta["title"], RESET)
     if not headerOnly:
         cellList = []
         for cell in content["cells"]:
@@ -92,6 +93,8 @@ def main():
             help='Path to Quiver library (Quiver.qvlibrary)')
     parser.add_argument('-i', '--ignore-case', action='store_true',
             help='Match case-insensitively')
+    parser.add_argument('-b', '--bullet-type', action='store',
+            help='Bullet type for title', default='*')
     parser.add_argument('-n', '--num-spaces', action='store',
             help='Num. of spaces on indent', type=int, default=4)
     parser.add_argument('-t', '--title', action='store_true',
@@ -132,7 +135,7 @@ def main():
                 matched = False
 
         if matched:
-            print toString(meta, content, args.title, args.num_spaces)
+            print toString(meta, content, args.title, args.num_spaces, args.bullet_type)
 
 if __name__ == "__main__":
     main()
