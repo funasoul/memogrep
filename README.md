@@ -48,3 +48,4 @@ function memogrep() {
 ```
 
 ## Screenshot
+![screenshot](https://raw.githubusercontent.com/funasoul/memogrep/images/memogrep.png)
