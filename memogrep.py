@@ -2,9 +2,9 @@
 # vim: set fileencoding=utf-8 :
 # -*- coding: utf-8 -*-
 #
-# Last modified: Thu, 10 Aug 2017 21:54:30 -0400
+# Last modified: Thu, 10 Aug 2017 23:13:47 -0400
 # 
-# (ex.) ./memogrep.py -q ~/Dropbox/Sync/Quiver/Quiver.qvlibrary keyword 
+# (ex.) ./memogrep.py keyword 
 #
 import argparse
 import datetime
@@ -69,7 +69,6 @@ def toString(meta, content, headerOnly, num_spaces, bullet_type):
         tagList.append("]")
 
     tagStr = ''.join(tagList)
-    #str = "* %s%s %s%s%s %s%s" % (YELLOW, dateStr, BLUE, tagStr, GREEN, meta["title"], RESET)
     str = "%s %s%s %s%s%s %s%s" % (bullet_type, YELLOW, dateStr, BLUE, tagStr, GREEN, meta["title"], RESET)
     if not headerOnly:
         cellList = []
@@ -89,8 +88,8 @@ def indent(text, amount, ch=' '):
 
 def main():
     parser = argparse.ArgumentParser(description="Search for KEYWORD in my Quiver memo")
-    parser.add_argument('-q', '--qvlibrary-path', action='store', required=True,
-            help='Path to Quiver library (Quiver.qvlibrary)')
+    parser.add_argument('-q', '--qvlibrary-path', action='store',
+            help='Path to Quiver library (Quiver.qvlibrary)', default=os.path.expanduser("~")+'/Library/Containers/com.happenapps.Quiver/Data/Library/Application Support/Quiver/Quiver.qvlibrary')
     parser.add_argument('-i', '--ignore-case', action='store_true',
             help='Match case-insensitively')
     parser.add_argument('-b', '--bullet-type', action='store',
