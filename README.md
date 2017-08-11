@@ -3,7 +3,7 @@ A simple grep for [Quiver](http://happenapps.com/#quiver) memo.
 
 ## Usage
 ```sh
-usage: memogrep.py [-h] -q QVLIBRARY_PATH [-i] [-b BULLET_TYPE]
+usage: memogrep.py [-h] [-q QVLIBRARY_PATH] [-i] [-b BULLET_TYPE]
                    [-n NUM_SPACES] [-t] [-v]
                    keyword [keyword ...]
 
@@ -27,11 +27,24 @@ optional arguments:
 
 ## Example
 ```sh
-% ./memogrep.py -q ~/Dropbox/Sync/Quiver/Quiver.qvlibrary keyword
+% ./memogrep.py keyword
 or
 % myqvlibrary=`mdfind -onlyin ~ -name Quiver.qvlibrary | grep 'Quiver/Quiver.qvlibrary'`
 % ./memogrep.py -q $myqvlibrary keyword
-
-Use with [terminal markdown viewer](https://github.com/axiros/terminal_markdown_viewer)
-% ./memogrep.py -q $myqvlibrary -i -n 0 -b '#' keyword | mdv -t 881.4906 - 
 ```
+Use with [terminal markdown viewer](https://github.com/axiros/terminal_markdown_viewer)
+```sh
+% ./memogrep.py -i -n 0 -b '#' keyword | mdv -t 881.4906 - 
+```
+If you are using zsh/bash, following function might be your help.
+```sh
+function memogrep() {
+  if hash mdv >/dev/null 2>&1; then
+    memogrep.py -i -n 0 -b '#' $@ | mdv -t 881.4906 - | less -sIx4XF
+  else
+    memogrep.py -i $@ | less -sIx4XF
+  fi
+}
+```
+
+## Screenshot
