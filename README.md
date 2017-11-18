@@ -4,7 +4,7 @@ A simple grep for [Quiver](http://happenapps.com/#quiver) memo.
 ## Usage
 ```sh
 usage: memogrep.py [-h] [-q QVLIBRARY_PATH] [-i] [-b BULLET_TYPE]
-                   [-n NUM_SPACES] [-t] [-v]
+                   [-n NUM_SPACES] [-t] [-T] [-v]
                    keyword [keyword ...]
 
 Search for KEYWORD in my Quiver memo
@@ -22,6 +22,8 @@ optional arguments:
   -n NUM_SPACES, --num-spaces NUM_SPACES
                         Num. of spaces on indent
   -t, --title           Displays title only
+  -T, --search-tag-only
+                        Search for KEYWORD in title only
   -v, --version         show program's version number and exit
 ```
 

@@ -2,7 +2,7 @@
 # vim: set fileencoding=utf-8 :
 # -*- coding: utf-8 -*-
 #
-# Last modified: Thu, 10 Aug 2017 23:13:47 -0400
+# Last modified: Sat, 18 Nov 2017 21:17:12 +0900
 # 
 # (ex.) ./memogrep.py keyword 
 #
@@ -98,6 +98,8 @@ def main():
             help='Num. of spaces on indent', type=int, default=4)
     parser.add_argument('-t', '--title', action='store_true',
             help='Displays title only')
+    parser.add_argument('-T', '--search-tag-only', action='store_true',
+            help='Search for KEYWORD in title only')
     parser.add_argument('-v', '--version', action='version',
             version=('memogrep.py %s' % __version__))
     parser.add_argument("pattern", metavar='keyword', nargs='+', help="search string")
@@ -130,8 +132,12 @@ def main():
         content = dictContent[key]
         matched = True
         for utf8_pattern in utf8_pattern_list:
-            if not contains_string(meta, utf8_pattern, args.ignore_case) and not contains_string(content, utf8_pattern, args.ignore_case):
-                matched = False
+            if args.search_tag_only:
+                if not contains_string(meta, utf8_pattern, args.ignore_case):
+                    matched = False
+            else:
+                if not contains_string(meta, utf8_pattern, args.ignore_case) and not contains_string(content, utf8_pattern, args.ignore_case):
+                    matched = False
 
         if matched:
             print toString(meta, content, args.title, args.num_spaces, args.bullet_type)
