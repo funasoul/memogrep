@@ -1,20 +1,19 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2.7
 # vim: set fileencoding=utf-8 :
 # -*- coding: utf-8 -*-
 #
-# Last modified: Thu, 10 Aug 2017 23:13:47 -0400
-# 
-# (ex.) ./memogrep.py keyword 
+# Last modified: Sat, 07 Mar 2020 19:56:15 +0900
+#
+# (ex.) ./memogrep.py keyword
 #
 import argparse
 import datetime
 import json
 import operator
 import os
-import sys
-from pprint import pprint
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
+
 
 def contains_string(dict, query, ignorecase):
     if (ignorecase):
@@ -36,6 +35,7 @@ def contains_string(dict, query, ignorecase):
 
     return False
 
+
 def contains_string_ignorecase(dict, query):
     if "tags" in dict:
         for tag in dict["tags"]:
@@ -52,6 +52,7 @@ def contains_string_ignorecase(dict, query):
                 return True
 
     return False
+
 
 def toString(meta, content, headerOnly, num_spaces, bullet_type):
     RESET   = '\033[0m'
@@ -81,10 +82,12 @@ def toString(meta, content, headerOnly, num_spaces, bullet_type):
 
     return str.encode('utf-8')
 
+
 def indent(text, amount, ch=' '):
     # http://stackoverflow.com/questions/8234274/how-to-indent-the-contents-of-a-multi-line-string
     padding = amount * ch
     return ''.join(padding+line for line in text.splitlines(True))
+
 
 def main():
     parser = argparse.ArgumentParser(description="Search for KEYWORD in my Quiver memo")
@@ -134,7 +137,8 @@ def main():
                 matched = False
 
         if matched:
-            print toString(meta, content, args.title, args.num_spaces, args.bullet_type)
+            print(toString(meta, content, args.title, args.num_spaces, args.bullet_type))
+
 
 if __name__ == "__main__":
     main()
